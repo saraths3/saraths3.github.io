@@ -1,0 +1,171 @@
+/* ==========================================================================
+   Gruvbox Minimal Modern Theme - Pure CSS Stylesheet
+   ========================================================================== */
+
+:root {
+  /* Gruvbox Light Palette */
+  --gb-bg: #fbf1c7;
+  --gb-bg-hard: #f9f5d7;
+  --gb-bg-soft: #f2e5bc;
+  --gb-surface: #ebdbb2;
+  --gb-surface-elevated: #d5c4a1;
+  --gb-border: #d5c4a1;
+  --gb-border-subtle: #e0d4b8;
+  
+  --gb-fg: #3c3836;
+  --gb-fg-strong: #282828;
+  --gb-fg-muted: #7c6f64;
+
+  --gb-red: #cc241d;
+  --gb-green: #79740e;
+  --gb-yellow: #b57614;
+  --gb-blue: #076678;
+  --gb-purple: #8f3f71;
+  --gb-aqua: #427b58;
+  --gb-orange: #af3a03;
+
+  --gb-accent: var(--gb-green);
+  --gb-accent-hover: #5d590a;
+}
+
+html.dark {
+  /* Gruvbox Dark Palette */
+  --gb-bg: #282828;
+  --gb-bg-hard: #1d2021;
+  --gb-bg-soft: #32302f;
+  --gb-surface: #3c3836;
+  --gb-surface-elevated: #504945;
+  --gb-border: #504945;
+  --gb-border-subtle: #3c3836;
+
+  --gb-fg: #ebdbb2;
+  --gb-fg-strong: #fbf1c7;
+  --gb-fg-muted: #a89984;
+
+  --gb-red: #fb4934;
+  --gb-green: #b8bb26;
+  --gb-yellow: #fabd2f;
+  --gb-blue: #83a598;
+  --gb-purple: #d3869b;
+  --gb-aqua: #8ec07c;
+  --gb-orange: #fe8019;
+
+  --gb-accent: var(--gb-green);
+  --gb-accent-hover: #c9cb39;
+}
+
+/* Base resets & typography */
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: var(--gb-bg);
+  color: var(--gb-fg);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  line-height: 1.6;
+}
+
+code, kbd, samp, pre, .font-mono {
+  font-family: 'JetBrains Mono', 'Fira Code', Menlo, Monaco, Consolas, monospace;
+}
+
+/* Custom Gruvbox Components & Helpers */
+.gb-card {
+  background-color: var(--gb-surface);
+  border: 1px solid var(--gb-border);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gb-card:hover {
+  border-color: var(--gb-accent);
+}
+
+.gb-tag {
+  background-color: var(--gb-bg-hard);
+  border: 1px solid var(--gb-border);
+  color: var(--gb-fg);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.55rem;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1.2;
+}
+
+.gb-badge-green {
+  background-color: rgba(184, 187, 38, 0.12);
+  border: 1px solid rgba(184, 187, 38, 0.35);
+  color: var(--gb-green);
+}
+
+.gb-badge-orange {
+  background-color: rgba(254, 128, 25, 0.12);
+  border: 1px solid rgba(254, 128, 25, 0.35);
+  color: var(--gb-orange);
+}
+
+.gb-badge-aqua {
+  background-color: rgba(142, 192, 124, 0.12);
+  border: 1px solid rgba(142, 192, 124, 0.35);
+  color: var(--gb-aqua);
+}
+
+.gb-badge-yellow {
+  background-color: rgba(250, 189, 47, 0.12);
+  border: 1px solid rgba(250, 189, 47, 0.35);
+  color: var(--gb-yellow);
+}
+
+.gb-badge-blue {
+  background-color: rgba(131, 165, 152, 0.12);
+  border: 1px solid rgba(131, 165, 152, 0.35);
+  color: var(--gb-blue);
+}
+
+.gb-badge-purple {
+  background-color: rgba(211, 134, 155, 0.12);
+  border: 1px solid rgba(211, 134, 155, 0.35);
+  color: var(--gb-purple);
+}
+
+/* Gruvbox subtle grid pattern */
+.gb-grid-pattern {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(124, 111, 100, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(124, 111, 100, 0.07) 1px, transparent 1px);
+}
+
+html.dark .gb-grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(168, 153, 132, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(168, 153, 132, 0.06) 1px, transparent 1px);
+}
+
+/* Toast Animation */
+#toast {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+}
+
+/* Mobile Safe Areas & Bottom Navigation Bar */
+#mobile-bottom-bar {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  #mobile-bottom-bar {
+    padding-bottom: calc(0.35rem + env(safe-area-inset-bottom));
+  }
+}
+
+/* Form input prevention of iOS zoom */
+@media screen and (max-width: 768px) {
+  input, textarea, select {
+    font-size: 16px !important;
+  }
+}

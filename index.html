@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sarath S. — Python & Django Backend Developer</title>
+  <meta name="description" content="Minimal, responsive, modern developer portfolio of Sarath S. — Junior Software Developer specializing in Python, Django, REST APIs, and real-time backend systems.">
+  <meta name="author" content="Sarath S.">
+  
+  <!-- Open Graph / Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Sarath S. | Junior Software Developer & Backend Engineer">
+  <meta property="og:description" content="Entry-level Python & Django backend developer from Kerala, India. Crafting robust APIs, real-time WebSockets, and clean architecture.">
+  <meta property="og:image" content="Images/avatar.png">
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS via CDN with Gruvbox Palette Extension -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            gb: {
+              'bg-hard': '#1d2021',
+              'bg': '#282828',
+              'bg-soft': '#32302f',
+              'surface': '#3c3836',
+              'elevated': '#504945',
+              'border': '#504945',
+              'border-subtle': '#3c3836',
+              'fg': '#ebdbb2',
+              'fg-strong': '#fbf1c7',
+              'fg-muted': '#a89984',
+              'green': '#b8bb26',
+              'yellow': '#fabd2f',
+              'orange': '#fe8019',
+              'aqua': '#8ec07c',
+              'blue': '#83a598',
+              'purple': '#d3869b',
+              'red': '#fb4934',
+              
+              // Gruvbox Light Palette
+              'l-bg-hard': '#f9f5d7',
+              'l-bg': '#fbf1c7',
+              'l-bg-soft': '#f2e5bc',
+              'l-surface': '#ebdbb2',
+              'l-elevated': '#d5c4a1',
+              'l-border': '#d5c4a1',
+              'l-fg': '#3c3836',
+              'l-fg-strong': '#282828',
+              'l-fg-muted': '#7c6f64',
+              'l-green': '#79740e',
+              'l-orange': '#af3a03',
+              'l-aqua': '#427b58',
+              'l-blue': '#076678',
+              'l-purple': '#8f3f71',
+              'l-yellow': '#b57614'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Pure CSS Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="bg-gb-l-bg text-gb-l-fg dark:bg-gb-bg dark:text-gb-fg transition-colors duration-200 antialiased selection:bg-gb-yellow/30 selection:text-gb-fg-strong min-h-screen flex flex-col justify-between pb-16 md:pb-0">
+
+  <!-- Minimal Toast Notification -->
+  <div id="toast" class="fixed bottom-20 md:bottom-6 right-6 z-50 transform translate-y-20 opacity-0 pointer-events-none flex items-center space-x-2.5 bg-gb-l-surface dark:bg-gb-surface text-gb-l-fg-strong dark:text-gb-fg-strong px-4 py-2.5 rounded border border-gb-l-border dark:border-gb-border shadow-xl font-mono text-xs">
+    <svg class="w-4 h-4 text-gb-l-green dark:text-gb-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+    <span id="toast-message">Notification message</span>
+  </div>
+
+  <!-- Header / Navigation Bar -->
+  <header class="sticky top-0 z-40 bg-gb-l-bg/95 dark:bg-gb-bg/95 backdrop-blur border-b border-gb-l-border dark:border-gb-border transition-colors">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex items-center justify-between h-14 sm:h-16">
+        
+        <!-- Logo / Monospace Status Line -->
+        <a href="#hero" class="flex items-center space-x-2 group">
+          <span class="font-mono text-xs text-gb-l-fg-muted dark:text-gb-fg-muted">~/</span>
+          <span class="font-mono font-bold text-sm sm:text-base text-gb-l-fg-strong dark:text-gb-fg-strong tracking-tight group-hover:text-gb-l-green dark:group-hover:text-gb-green transition-colors">
+            sarath<span class="text-gb-l-orange dark:text-gb-orange">:</span>backend
+          </span>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center space-x-6 text-xs font-mono">
+          <a href="#about" class="text-gb-l-fg-muted dark:text-gb-fg-muted hover:text-gb-l-green dark:hover:text-gb-green transition-colors">about</a>
+          <a href="#skills" class="text-gb-l-fg-muted dark:text-gb-fg-muted hover:text-gb-l-green dark:hover:text-gb-green transition-colors">skills</a>
+          <a href="#projects" class="text-gb-l-fg-muted dark:text-gb-fg-muted hover:text-gb-l-green dark:hover:text-gb-green transition-colors">projects</a>
+          <a href="#ongoing" class="text-gb-l-fg-muted dark:text-gb-fg-muted hover:text-gb-l-orange dark:hover:text-gb-orange transition-colors flex items-center space-x-1">
+            <span>ongoing</span>
+            <span class="w-1.5 h-1.5 rounded-full bg-gb-orange animate-pulse"></span>
+          </a>
+          <a href="#certifications" class="text-gb-l-fg-muted dark:text-gb-fg-muted hover:text-gb-l-green dark:hover:text-gb-green transition-colors">certifications</a>
+          <a href="#contact" class="text-gb-l-fg-muted dark:text-gb-fg-muted hover:text-gb-l-green dark:hover:text-gb-green transition-colors">contact</a>
+        </nav>
+
+        <!-- Right Side: Resume Link & Theme Switcher -->
+        <div class="hidden md:flex items-center space-x-3">
+          <a href="Resume/Resume.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded border border-gb-l-border dark:border-gb-border bg-gb-l-surface dark:bg-gb-surface text-gb-l-fg-strong dark:text-gb-fg-strong hover:border-gb-l-green dark:hover:border-gb-green font-mono text-xs transition">
+            <svg class="w-3.5 h-3.5 text-gb-l-green dark:text-gb-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            <span>resume.pdf</span>
+          </a>
+
+          <!-- Theme Toggle Button -->
+          <button type="button" onclick="toggleTheme()" aria-label="Toggle Theme" class="p-1.5 rounded border border-gb-l-border dark:border-gb-border text-gb-l-fg-muted dark:text-gb-fg-muted hover:text-gb-l-fg-strong dark:hover:text-gb-fg-strong hover:border-gb-l-fg dark:hover:border-gb-fg transition">
+            <svg class="w-4 h-4 hidden dark:block text-gb-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            <svg class="w-4 h-4 block dark:hidden text-gb-l-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+          </button>
+        </div>
+
+        <!-- Mobile Header Controls -->
+        <div class="flex items-center space-x-2 md:hidden">
+          <button type="button" onclick="toggleTheme()" aria-label="Toggle Theme" class="p-1.5 rounded border border-gb-l-border dark:border-gb-border text-gb-l-fg-muted dark:text-gb-fg-muted">
+            <svg class="w-4 h-4 hidden dark:block text-gb-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            <svg class="w-4 h-4 block dark:hidden text-gb-l-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+          </button>
+          
+          <button id="menu-btn" type="button" onclick="toggleMobileMenu()" aria-label="Toggle navigation drawer" class="p-1.5 rounded border border-gb-l-border dark:border-gb-border text-gb-l-fg-muted dark:text-gb-fg-muted">
+            <svg id="menu-icon-bars" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            <svg id="menu-icon-close" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Menu (Accessible via Top Menu Button) -->
+    <div id="mobile-drawer" class="hidden md:hidden border-b border-gb-l-border dark:border-gb-border bg-gb-l-bg dark:bg-gb-bg px-4 py-3 space-y-1.5 font-mono text-xs">
+      <a href="#about" onclick="toggleMobileMenu()" class="block py-1.5 px-2 rounded hover:bg-gb-l-surface dark:hover:bg-gb-surface">/about</a>
+      <a href="#skills" onclick="toggleMobileMenu()" class="block py-1.5 px-2 rounded hover:bg-gb-l-surface dark:hover:bg-gb-surface">/skills</a>
+      <a href="#projects" onclick="toggleMobileMenu()" class="block py-1.5 px-2 rounded hover:bg-gb-l-surface dark:hover:bg-gb-surface">/projects</a>
+      <a href="#ongoing" onclick="toggleMobileMenu()" class="block py-1.5 px-2 rounded hover:bg-gb-l-surface dark:hover:bg-gb-surface text-gb-l-orange dark:text-gb-orange">/ongoing (active)</a>
+      <a href="#certifications" onclick="toggleMobileMenu()" class="block py-1.5 px-2 rounded hover:bg-gb-l-surface dark:hover:bg-gb-surface">/certifications</a>
+      <a href="#contact" onclick="toggleMobileMenu()" class="block py-1.5 px-2 rounded hover:bg-gb-l-surface dark:hover:bg-gb-surface">/contact</a>
+      <a href="Resume/Resume.pdf" target="_blank" rel="noopener noreferrer" class="block py-1.5 px-2 rounded font-semibold text-gb-l-green dark:text-gb-green border border-gb-l-border dark:border-gb-border text-center mt-2">
+        View Resume (PDF)
+      </a>
+    </div>
+  </header>
+
+  <main class="flex-grow">
+    <!-- HERO SECTION WITH BACKGROUND IMAGE -->
+    <section id="hero" class="relative py-12 sm:py-16 md:py-24 gb-grid-pattern border-b border-gb-l-border dark:border-gb-border overflow-hidden">
+      
+      <!-- Background Image Overlay from Images/background.png -->
+      <div class="absolute inset-0 pointer-events-none opacity-10 dark:opacity-20 overflow-hidden mix-blend-overlay">
+        <img src="Images/background.png" alt="Background pattern" class="w-full h-full object-cover filter blur-[1px]">
+      </div>
+
+      <div class="relative max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="flex flex-col-reverse md:flex-row items-center md:items-start justify-between gap-8 md:gap-14">
+          
+          <!-- Hero Text -->
+          <div class="w-full md:w-2/3 space-y-4 text-center md:text-left">
+            
+            <!-- Terminal Status Line -->
+            <div class="inline-flex items-center space-x-2 px-2.5 py-1 rounded bg-gb-l-surface dark:bg-gb-surface border border-gb-l-border dark:border-gb-border font-mono text-xs">
+              <span class="w-2 h-2 rounded-full bg-gb-green animate-pulse"></span>
+              <span class="text-gb-l-green dark:text-gb-green font-medium">available_for_work = True</span>
+            </div>
+
+            <!-- Title & Name -->
+            <div class="space-y-1">
+              <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-gb-l-fg-strong dark:text-gb-fg-strong font-mono">
+                Sarath S<span class="text-gb-l-orange dark:text-gb-orange">.</span>
+              </h1>
+              <p class="font-mono text-sm sm:text-base text-gb-l-green dark:text-gb-green font-semibold">
+                Junior Software Developer <span class="text-gb-l-fg-muted dark:text-gb-fg-muted font-normal">|</span> Python & Backend
+              </p>
+            </div>
+
+            <!-- Location Line -->
+            <div class="flex items-center justify-center md:justify-start space-x-2 font-mono text-xs text-gb-l-fg-muted dark:text-gb-fg-muted">
+              <svg class="w-3.5 h-3.5 text-gb-l-orange dark:text-gb-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              <span>Kerala, India</span>
+              <span>•</span>
+              <span>Remote / On-site</span>
+            </div>
+
+            <!-- Elevator Pitch -->
+            <p class="text-gb-l-fg dark:text-gb-fg text-sm sm:text-base leading-relaxed max-w-2xl">
+              Backend developer focused on building clean, test-driven web services with <strong class="text-gb-l-fg-strong dark:text-gb-fg-strong font-semibold">Python</strong>, <strong class="text-gb-l-fg-strong dark:text-gb-fg-strong font-semibold">Django</strong>, and <strong class="text-gb-l-fg-strong dark:text-gb-fg-strong font-semibold">PostgreSQL</strong>. Experienced in designing REST APIs, real-time WebSockets via Django Channels, and securing OAuth 2.0 authentications.
+            </p>
+
+            <!-- Action CTAs -->
+            <div class="flex flex-wrap items-center justify-center md:justify-start gap-2.5 pt-2">
+              <a href="#projects" class="px-4 py-2 rounded bg-gb-l-green dark:bg-gb-green text-gb-bg-hard font-mono text-xs font-semibold hover:opacity-90 transition flex items-center space-x-1.5">
+                <span>View Projects</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+              </a>
+
+              <a href="Resume/Resume.pdf" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded border border-gb-l-border dark:border-gb-border bg-gb-l-surface dark:bg-gb-surface text-gb-l-fg-strong dark:text-gb-fg-strong font-mono text-xs hover:border-gb-l-green dark:hover:border-gb-green transition flex items-center space-x-1.5">
+                <svg class="w-3.5 h-3.5 text-gb-l-green dark:text-gb-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                <span>Resume (PDF)</span>
+              </a>
+
+              <button type="button" onclick="copyEmail()" class="px-3 py-2 rounded border border-gb-l-border dark:border-gb-border bg-transparent text-gb-l-fg-muted dark:text-gb-fg-muted font-mono text-xs hover:text-gb-l-fg-strong dark:hover:text-gb-fg-strong transition flex items-center space-x-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+                <span>Copy Email</span>
+              </button>
+            </div>
+
+            <!-- Social Links Strip -->
+            <div class="flex items-center justify-center md:justify-start space-x-4 pt-2 text-xs font-mono text-gb-l-fg-muted dark:text-gb-fg-muted">
+              <span>Connect:</span>
+              <a href="https://github.com/saraths3" target="_blank" rel="noopener noreferrer" class="hover:text-gb-l-fg-strong dark:hover:text-gb-fg-strong flex items-center space-x-1">
+                <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                <span>GitHub</span>
+              </a>
+              <a href="https://www.linkedin.com/in/sarath1s/" target="_blank" rel="noopener noreferrer" class="hover:text-gb-l-blue dark:hover:text-gb-blue flex items-center space-x-1">
+                <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                <span>LinkedIn</span>
+              </a>
+            </div>
+
+          </div>
+
+          <!-- Hero Avatar: Images/avatar.png -->
+          <div class="w-44 sm:w-52 md:w-60 shrink-0 flex flex-col items-center">
+            <div class="relative p-1.5 rounded-full border-2 border-gb-l-border dark:border-gb-border bg-gb-l-surface dark:bg-gb-surface shadow-md">
+              <div class="w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 rounded-full overflow-hidden border border-gb-l-green/40 dark:border-gb-green/40 bg-gb-l-bg-hard dark:bg-gb-bg-hard">
+                <img src="Images/avatar.png" alt="Sarath S. Avatar" class="w-full h-full object-cover">
+              </div>
+              <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded bg-gb-l-bg dark:bg-gb-bg border border-gb-l-border dark:border-gb-border text-[10px] font-mono whitespace-nowrap text-gb-l-green dark:text-gb-green">
+                ● Kerala, IN
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION & PROFILES SHOWCASE -->
+    <section id="about" class="py-16 border-b border-gb-l-border dark:border-gb-border">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        
+        <div class="mb-10 flex items-center space-x-2 font-mono text-xs uppercase tracking-wider text-gb-l-green dark:text-gb-green">
+          <span>01.</span>
+          <span>About & Online Profiles</span>
+          <div class="h-px bg-gb-l-border dark:border-gb-border flex-grow max-w-xs ml-2"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+          
+          <div class="md:col-span-7 space-y-4 text-sm leading-relaxed text-gb-l-fg dark:text-gb-fg">
+            <p>
+              I am an entry-level backend developer with an eye for clean code, test-driven reliability, and maintainable software engineering.
+            </p>
+            <p>
+              My hands-on experience includes developing full-stack applications with <strong class="text-gb-l-fg-strong dark:text-gb-fg-strong font-semibold">Django and Django REST Framework</strong>, orchestrating real-time WebSocket communication using <strong class="text-gb-l-fg-strong dark:text-gb-fg-strong font-semibold">Django Channels</strong>, implementing <strong class="text-gb-l-aqua dark:text-gb-aqua font-semibold">OAuth 2.0</strong> authorization, and writing comprehensive test suites to verify data isolation.
+            </p>
+            <p>
+              I enjoy working in modern Linux environments (Fedora), leveraging efficient tools like <code class="px-1.5 py-0.5 rounded bg-gb-l-surface dark:bg-gb-surface border border-gb-l-border dark:border-gb-border font-mono text-xs text-gb-l-orange dark:text-gb-orange">uv</code> and Git, and designing predictable RESTful schemas.
+            </p>
+
+            <!-- Metrics -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 font-mono text-xs">
+              <div class="p-2.5 rounded border border-gb-l-border dark:border-gb-border bg-gb-l-surface dark:bg-gb-surface text-center">
+                <div class="text-base font-bold text-gb-l-green dark:text-gb-green">4+</div>
+                <div class="text-[10px] text-gb-l-fg-muted dark:text-gb-fg-muted">Apps Built</div>
+              </div>
+              <div class="p-2.5 rounded border border-gb-l-border dark:border-gb-border bg-gb-l-surface dark:bg-gb-surface text-center">
+                <div class="text-base font-bold text-gb-l-aqua dark:text-gb-aqua">26+</div>
+                <div class="text-[10px] text-gb-l-fg-muted dark:text-gb-fg-muted">Unit Tests</div>
+              </div>
+              <div class="p-2.5 rounded border border-gb-l-border dark:border-gb-border bg-gb-l-surface dark:bg-gb-surface text-center">
+                <div class="text-base font-bold text-gb-l-orange dark:text-gb-orange">ASGI</div>
+                <div class="text-[10px] text-gb-l-fg-muted dark:text-gb-fg-muted">WebSockets</div>
+              </div>
+              <div class="p-2.5 rounded border border-gb-l-border dark:border-gb-border bg-gb-l-surface dark:bg-gb-surface text-center">
+                <div class="text-base font-bold text-gb-l-yellow dark:text-gb-yellow">OAuth</div>
+                <div class="text-[10px] text-gb-l-fg-muted dark:text-gb-fg-muted">Auth 2.0</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Including Github/avatar.png and Linkedin/avatar.png Profiles -->
+          <div class="md:col-span-5 space-y-3 font-mono text-xs">
+            
+            <!-- GitHub Profile Card incorporating Github/avatar.png -->
+            <a href="https://github.com/saraths3" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-3.5 p-3.5 rounded border border-gb-l-border dark:border-gb-border bg-gb-l-surface dark:bg-gb-surface hover:border-gb-l-green dark:hover:border-gb-green transition group">
+              <div class="w-12 h-12 rounded-full overflow-hidden border border-gb-l-border dark:border-gb-border shrink-0 bg-gb-l-bg-hard dark:bg-gb-bg-hard">
+                <img src="Github/avatar.png" alt="GitHub Profile" class="w-full h-full object-cover">
+              </div>
+              <div class="flex-grow">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-gb-l-fg-strong dark:text-gb-fg-strong">github.com/saraths3</span>
+                  <svg class="w-3.5 h-3.5 text-gb-l-fg-muted dark:text-gb-fg-muted group-hover:text-gb-l-green dark:group-hover:text-gb-green transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                </div>
+                <p class="text-[11px] text-gb-l-fg-muted dark:text-gb-fg-muted">Explore public repositories & backend projects</p>
+              </div>
+            </a>
+
+            <!-- LinkedIn Profile Card incorporating Linkedin/avatar.png -->
+            <a href="https://www.linkedin.com/in/sarath1s/" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-3.5 p-3.5 rounded border border-gb-l-border dark:border-gb-border bg-gb-l-surface dark:bg-gb-surface hover:border-gb-l-blue dark:hover:border-gb-blue transition group">
+              <div class="w-12 h-12 rounded-full overflow-hidden border border-gb-l-border dark:border-gb-border shrink-0 bg-gb-l-bg-hard dark:bg-gb-bg-hard">
+                <img src="Linkedin/avatar.png" alt="LinkedIn Profile" class="w-full h-full object-cover">
+              </div>
+              <div class="flex-grow">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-gb-l-fg-strong dark:text-gb-fg-strong">linkedin.com/in/sarath1s</span>
+                  <svg class="w-3.5 h-3.5 text-gb-l-fg-muted dark:text-gb-fg-muted group-hover:text-gb-l-blue dark:group-hover:text-gb-blue transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                </div>
+                <p class="text-[11px] text-gb-l-fg-muted dark:text-gb-fg-muted">Connect for backend developer opportunities</p>
+              </div>
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CORE TECHNICAL SKILLS SECTION -->
+    <section id="skills" class="py-16 border-b border-gb-l-border dark:border-gb-border">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        
+        <div class="mb-10 flex items-center space-x-2 font-mono text-xs uppercase tracking-wider text-gb-l-green dark:text-gb-green">
+          <span>02.</span>
+          <span>Technical Skills</span>
+          <div class="h-px bg-gb-l-border dark:border-gb-border flex-grow max-w-xs ml-2"></div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          
+          <!-- Category: Languages -->
+          <div class="p-4 rounded border border-gb-l-border dark:border-gb-border bg-gb-l-surface dark:bg-gb-surface space-y-3">
+            <div class="flex items-center space-x-2 font-mono text-xs font-semibold text-gb-l-fg-strong dark:text-gb-fg-strong">
+              <svg class="w-4 h-4 text-gb-l-green dark:text-gb-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+              <span>Languages</span>
+            </div>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="gb-tag gb-badge-green font-semibold">Python</span>
+              <span class="gb-tag gb-badge-aqua">SQL</span>
+            </div>
+          </div>
+
+          <!-- Category: Frameworks -->
+          <div class="p-4 rounded border border-gb-l-border dark:border-gb-border bg-gb-l-surface dark:bg-gb-surface space-y-3">
+            <div class="flex items-center space-x-2 font-mono text-xs font-semibold text-gb-l-fg-strong dark:text-gb-fg-strong">
+              <svg class="w-4 h-4 text-gb-l-green dark:text-gb-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+              <span>Frameworks</span>
+            </div>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="gb-tag gb-badge-green font-semibold">Django</span>
+              <span class="gb-tag gb-badge-green">Django REST Framework</span>
+              <span class="gb-tag gb-badge-aqua">Django Channels</span>
+            </div>
+          </div>
+
+          <!-- Category: Core Concepts -->
+          <div class="p-4 rounded border border-gb-l-border dark:border-gb-border bg-gb-l-surface dark:bg-gb-surface space-y-3">
+            <div class="flex items-center space-x-2 font-mono text-xs font-semibold text-gb-l-fg-strong dark:text-gb-fg-strong">
+              <svg class="w-4 h-4 text-gb-l-yellow dark:text-gb-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/></svg>
+              <span>Core Concepts</span>
+            </div>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="gb-tag">OOP</span>
+              <span class="gb-tag">Debugging</span>
+              <span class="gb-tag gb-badge-yellow font-semibold">Unit Testing</span>
+            </div>
+          </div>
+
+          <!-- Category: Databases -->
+          <div class="p-4 rounded border border-gb-l-border dark:border-gb-border bg-gb-l-surface dark:bg-gb-surface space-y-3">
+            <div class="flex items-center space-x-2 font-mono text-xs font-semibold text-gb-l-fg-strong dark:text-gb-fg-strong">
+              <svg class="w-4 h-4 text-gb-l-aqua dark:text-gb-aqua" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/></svg>
+              <span>Databases</span>
+            </div>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="gb-tag gb-badge-aqua font-semibold">PostgreSQL</span>
+              <span class="gb-tag">SQLite</span>
+            </div>
+          </div>
+
+          <!-- Category: APIs & Web -->
+          <div class="p-4 rounded border border-gb-l-border dark:border-gb-border bg-gb-l-surface dark:bg-gb-surface space-y-3">
+            <div class="flex items-center space-x-2 font-mono text-xs font-semibold text-gb-l-fg-strong dark:text-gb-fg-strong">
+              <svg class="w-4 h-4 text-gb-l-orange dark:text-gb-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
+              <span>APIs & Web</span>
+            </div>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="gb-tag gb-badge-orange font-semibold">REST APIs</span>
+              <span class="gb-tag gb-badge-aqua">WebSockets</span>
+              <span class="gb-tag gb-badge-purple">OAuth 2.0</span>
+              <span class="gb-tag">HTML</span>
+              <span class="gb-tag">CSS</span>
+            </div>
+          </div>
+
+          <!-- Category: Tools & DevOps -->
+          <div class="p-4 rounded border border-gb-l-border dark:border-gb-border bg-gb-l-surface dark:bg-gb-surface space-y-3">
+            <div class="flex items-center space-x-2 font-mono text-xs font-semibold text-gb-l-fg-strong dark:text-gb-fg-strong">
+              <svg class="w-4 h-4 text-gb-l-blue dark:text-gb-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              <span>Tools & DevOps</span>
+            </div>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="gb-tag">Git & GitHub</span>
+              <span class="gb-tag gb-badge-orange">Postman</span>
+              <span class="gb-tag gb-badge-green font-semibold">Render</span>
+              <span class="gb-tag gb-badge-aqua font-semibold">uv</span>
+              <span class="gb-tag gb-badge-blue">Fedora Linux</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FEATURED PROJECTS SECTION -->
+    <section id="projects" class="py-16 border-b border-gb-l-border dark:border-gb-border">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        
+        <div class="mb-10 flex items-center space-x-2 font-mono text-xs uppercase tracking-wider text-gb-l-green dark:text-gb-green">
+          <span>03.</span>
+          <span>Featured Projects</span>
+          <div class="h-px bg-gb-l-border dark:border-gb-border flex-grow max-w-xs ml-2"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          <!-- PROJECT 1: PTextr -->
+          <div class="p-6 rounded border border-gb-l-border dark:border-gb-border bg-gb-l-surface dark:bg-gb-surface hover:border-gb-l-green dark:hover:border-gb-green transition flex flex-col justify-between space-y-4">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between text-xs font-mono">
+                <span class="text-gb-l-orange dark:text-gb-orange font-medium">01 // AI & Extension</span>
+                <span class="text-gb-l-green dark:text-gb-green flex items-center space-x-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-gb-green animate-pulse"></span>
+                  <span>render.com</span>
+                </span>
+              </div>
+
+              <h3 class="text-xl font-bold font-mono text-gb-l-fg-strong dark:text-gb-fg-strong">
+                PTextr
+              </h3>
+              <p class="text-xs text-gb-l-fg-muted dark:text-gb-fg-muted font-mono">
+                Website and Browser Extension with Gemini AI
+              </p>
+
+              <p class="text-xs sm:text-sm text-gb-l-fg dark:text-gb-fg leading-relaxed">
+                Built backend API endpoints using Python and the Gemini API to process selected text prompts and return structured responses to a browser extension. Debugged API request handling and JSON response parsing for seamless text replacement on web pages.
+              </p>
+
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                <span class="gb-tag">Python</span>
+                <span class="gb-tag gb-badge-green">Gemini API</span>
+                <span class="gb-tag">REST API</span>
+                <span class="gb-tag">Browser Extension</span>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-gb-l-border dark:border-gb-border flex items-center justify-between gap-3 text-xs font-mono">
+              <a href="https://github.com/saraths3/PTextr" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-1.5 text-gb-l-fg-muted dark:text-gb-fg-muted hover:text-gb-l-fg-strong dark:hover:text-gb-fg-strong transition">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                <span>GitHub Repo</span>
+              </a>
+
+              <a href="https://ptextr.onrender.com/" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded bg-gb-l-green dark:bg-gb-green text-gb-bg-hard font-semibold hover:opacity-90 transition flex items-center space-x-1">
+                <span>Live Demo</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- PROJECT 2: LaterNote -->
+          <div class="p-6 rounded border border-gb-l-border dark:border-gb-border bg-gb-l-surface dark:bg-gb-surface hover:border-gb-l-green dark:hover:border-gb-green transition flex flex-col justify-between space-y-4">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between text-xs font-mono">
+                <span class="text-gb-l-aqua dark:text-gb-aqua font-medium">02 // Testing & Auth</span>
+                <span class="text-gb-l-green dark:text-gb-green flex items-center space-x-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-gb-green animate-pulse"></span>
+                  <span>render.com</span>
+                </span>
+              </div>
+
+              <h3 class="text-xl font-bold font-mono text-gb-l-fg-strong dark:text-gb-fg-strong">
+                LaterNote
+              </h3>
+              <p class="text-xs text-gb-l-fg-muted dark:text-gb-fg-muted font-mono">
+                Time-Locked Future Messaging App
+              </p>
+
+              <p class="text-xs sm:text-sm text-gb-l-fg dark:text-gb-fg leading-relaxed">
+                Built a full-stack Django application using native authentication and dynamic timezone checks to lock messages until their scheduled unlock date. Wrote 26 automated unit and integration tests to verify data isolation and zero content leaks before deploying on Render.
+              </p>
+
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                <span class="gb-tag gb-badge-green font-semibold">Django</span>
+                <span class="gb-tag gb-badge-yellow font-semibold">26 Unit Tests</span>
+                <span class="gb-tag">Timezone Engine</span>
+                <span class="gb-tag">PostgreSQL</span>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-gb-l-border dark:border-gb-border flex items-center justify-between gap-3 text-xs font-mono">
+              <a href="https://github.com/saraths3/LaterNote/tree/main" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-1.5 text-gb-l-fg-muted dark:text-gb-fg-muted hover:text-gb-l-fg-strong dark:hover:text-gb-fg-strong transition">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                <span>GitHub Repo</span>
+              </a>
+
+              <a href="https://laternote.onrender.com/dashboard/" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded bg-gb-l-green dark:bg-gb-green text-gb-bg-hard font-semibold hover:opacity-90 transition flex items-center space-x-1">
+                <span>Live Demo</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- PROJECT 3: Hloi -->
+          <div class="p-6 rounded border border-gb-l-border dark:border-gb-border bg-gb-l-surface dark:bg-gb-surface hover:border-gb-l-green dark:hover:border-gb-green transition flex flex-col justify-between space-y-4">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between text-xs font-mono">
+                <span class="text-gb-l-purple dark:text-gb-purple font-medium">03 // Real-Time & WebSockets</span>
+                <span class="text-gb-l-green dark:text-gb-green flex items-center space-x-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-gb-green animate-pulse"></span>
+                  <span>render.com</span>
+                </span>
+              </div>
+
+              <h3 class="text-xl font-bold font-mono text-gb-l-fg-strong dark:text-gb-fg-strong">
+                Hloi
+              </h3>
+              <p class="text-xs text-gb-l-fg-muted dark:text-gb-fg-muted font-mono">
+                Live Chat Application
+              </p>
+
+              <p class="text-xs sm:text-sm text-gb-l-fg dark:text-gb-fg leading-relaxed">
+                Built a real-time chat backend using Django Channels and WebSockets to support instant message delivery across active user sessions. Implemented OAuth 2.0 user authentication and smooth UI updates without full page reloads.
+              </p>
+
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                <span class="gb-tag gb-badge-green font-semibold">Django Channels</span>
+                <span class="gb-tag gb-badge-aqua">WebSockets</span>
+                <span class="gb-tag gb-badge-purple">OAuth 2.0</span>
+                <span class="gb-tag">ASGI</span>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-gb-l-border dark:border-gb-border flex items-center justify-between gap-3 text-xs font-mono">
+              <a href="https://github.com/saraths3/HLoi---Chat-App" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-1.5 text-gb-l-fg-muted dark:text-gb-fg-muted hover:text-gb-l-fg-strong dark:hover:text-gb-fg-strong transition">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                <span>GitHub Repo</span>
+              </a>
+
+              <a href="https://hloi-chat-app-y7t0.onrender.com/" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded bg-gb-l-green dark:bg-gb-green text-gb-bg-hard font-semibold hover:opacity-90 transition flex items-center space-x-1">
+                <span>Live Demo</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- PROJECT 4: SkillOrbit -->
+          <div class="p-6 rounded border border-gb-l-border dark:border-gb-border bg-gb-l-surface dark:bg-gb-surface hover:border-gb-l-green dark:hover:border-gb-green transition flex flex-col justify-between space-y-4">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between text-xs font-mono">
+                <span class="text-gb-l-blue dark:text-gb-blue font-medium">04 // Social Platform</span>
+                <span class="text-gb-l-fg-muted dark:text-gb-fg-muted">Full-Stack Backend</span>
+              </div>
+
+              <h3 class="text-xl font-bold font-mono text-gb-l-fg-strong dark:text-gb-fg-strong">
+                SkillOrbit
+              </h3>
+              <p class="text-xs text-gb-l-fg-muted dark:text-gb-fg-muted font-mono">
+                Skill Exchange Application
+              </p>
+
+              <p class="text-xs sm:text-sm text-gb-l-fg dark:text-gb-fg leading-relaxed">
+                Implemented user registration and login using Google and GitHub OAuth 2.0 for secure account onboarding. Developed modular backend features for student study groups, live chat messaging, and video calls integrated with Jitsi.
+              </p>
+
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                <span class="gb-tag gb-badge-green font-semibold">Django</span>
+                <span class="gb-tag gb-badge-purple">Google/GitHub OAuth</span>
+                <span class="gb-tag">Jitsi Video</span>
+                <span class="gb-tag">Study Groups</span>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-gb-l-border dark:border-gb-border flex items-center justify-between gap-3 text-xs font-mono">
+              <a href="https://github.com/saraths3/SkillOrbit" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-1.5 text-gb-l-fg-muted dark:text-gb-fg-muted hover:text-gb-l-fg-strong dark:hover:text-gb-fg-strong transition">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                <span>GitHub Repo</span>
+              </a>
+
+              <span class="text-gb-l-fg-muted dark:text-gb-fg-muted text-[11px]">
+                Modular Backend Architecture
+              </span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ONGOING / IN-PROGRESS SECTION -->
+    <section id="ongoing" class="py-16 border-b border-gb-l-border dark:border-gb-border">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        
+        <div class="mb-10 flex items-center space-x-2 font-mono text-xs uppercase tracking-wider text-gb-l-orange dark:text-gb-orange">
+          <span>04.</span>
+          <span>In Active Progress</span>
+          <div class="h-px bg-gb-l-border dark:border-gb-border flex-grow max-w-xs ml-2"></div>
+        </div>
+
+        <div class="p-6 sm:p-8 rounded border-2 border-gb-l-orange/50 dark:border-gb-orange/50 bg-gb-l-surface dark:bg-gb-surface space-y-4">
+          
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div class="inline-flex items-center space-x-2 px-2.5 py-1 rounded bg-gb-orange/10 border border-gb-orange/30 text-gb-l-orange dark:text-gb-orange font-mono text-xs font-semibold">
+              <span class="w-2 h-2 rounded-full bg-gb-orange animate-ping"></span>
+              <span>WIP // IN ACTIVE DEVELOPMENT</span>
+            </div>
+            <span class="font-mono text-xs text-gb-l-fg-muted dark:text-gb-fg-muted">git checkout main</span>
+          </div>
+
+          <div class="space-y-1">
+            <h3 class="text-2xl font-bold font-mono text-gb-l-fg-strong dark:text-gb-fg-strong">
+              Assist-Me / Assist
+            </h3>
+            <p class="font-mono text-xs text-gb-l-orange dark:text-gb-orange">
+              AI Coding Companion & Python CLI Tool
+            </p>
+          </div>
+
+          <p class="text-sm text-gb-l-fg dark:text-gb-fg leading-relaxed">
+            A backend-focused AI coding companion powered by <strong class="text-gb-l-green dark:text-gb-green font-semibold">Django</strong>, <strong class="text-gb-l-green dark:text-gb-green font-semibold">Django REST Framework</strong>, and the official <strong class="text-gb-l-aqua dark:text-gb-aqua font-semibold">google-genai SDK</strong>. Features an installable Python CLI interface to assist developers directly inside the terminal with smart code reviews, context-aware prompt orchestration, and streaming responses.
+          </p>
+
+          <!-- Terminal Style Architecture Box -->
+          <div class="p-4 rounded bg-gb-l-bg-hard dark:bg-gb-bg-hard border border-gb-l-border dark:border-gb-border font-mono text-xs space-y-2 text-gb-l-fg dark:text-gb-fg">
+            <div class="text-gb-l-fg-muted dark:text-gb-fg-muted"># Pipeline Status & Architecture:</div>
+            <div class="flex items-center space-x-2 text-gb-l-green dark:text-gb-green">
+              <span>[✓]</span>
+              <span>Django REST Framework API service & token auth</span>
+            </div>
+            <div class="flex items-center space-x-2 text-gb-l-green dark:text-gb-green">
+              <span>[✓]</span>
+              <span>google-genai SDK integration & streaming logic</span>
+            </div>
+            <div class="flex items-center space-x-2 text-gb-l-orange dark:text-gb-orange">
+              <span>[~]</span>
+              <span>Installable Python CLI package packaging & tests</span>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-between gap-4 pt-2">
+            <a href="https://github.com/saraths3/Assist-Me" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded bg-gb-l-orange dark:bg-gb-orange text-gb-bg-hard font-mono text-xs font-semibold hover:opacity-90 transition flex items-center space-x-1.5">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              <span>View Repository on GitHub</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+
+            <span class="font-mono text-xs text-gb-l-fg-muted dark:text-gb-fg-muted">
+              License: Open Source
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CERTIFICATIONS SECTION (PDF LINKS) -->
+    <section id="certifications" class="py-16 border-b border-gb-l-border dark:border-gb-border">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        
+        <div class="mb-10 flex items-center space-x-2 font-mono text-xs uppercase tracking-wider text-gb-l-green dark:text-gb-green">
+          <span>05.</span>
+          <span>Verified Certifications</span>
+          <div class="h-px bg-gb-l-border dark:border-gb-border flex-grow max-w-xs ml-2"></div>
+        </div>
+
+        <div class="p-6 sm:p-8 rounded border border-gb-l-border dark:border-gb-border bg-gb-l-surface dark:bg-gb-surface space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <h3 class="text-lg sm:text-xl font-bold font-mono text-gb-l-fg-strong dark:text-gb-fg-strong">
+                Program in AI-Driven Python Programming
+              </h3>
+              <p class="font-mono text-xs text-gb-l-green dark:text-gb-green">
+                Entri Software Pvt. Ltd. | Illinois Tech (US) | NSDC
+              </p>
+            </div>
+            <span class="font-mono text-xs px-2.5 py-1 rounded bg-gb-l-bg dark:bg-gb-bg border border-gb-l-border dark:border-gb-border text-gb-l-fg-muted dark:text-gb-fg-muted self-start sm:self-auto">
+              Completed 2026
+            </span>
+          </div>
+
+          <p class="text-xs sm:text-sm text-gb-l-fg dark:text-gb-fg leading-relaxed">
+            Accredited program emphasizing algorithmic problem solving, core Python engineering, backend API development, and AI-driven workflows certified by NSDC and Illinois Tech.
+          </p>
+
+          <div class="pt-3 border-t border-gb-l-border dark:border-gb-border grid grid-cols-1 sm:grid-cols-2 gap-3 font-mono text-xs">
+            
+            <!-- Certificate 1 Link -->
+            <a href="Certifications/HMRHWGW-JOOYL.pdf" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3 rounded bg-gb-l-bg-hard dark:bg-gb-bg-hard border border-gb-l-border dark:border-gb-border hover:border-gb-l-green dark:hover:border-gb-green transition group">
+              <div class="flex items-center space-x-2.5">
+                <svg class="w-4 h-4 text-gb-l-green dark:text-gb-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                <div class="text-left">
+                  <div class="font-semibold text-gb-l-fg-strong dark:text-gb-fg-strong">Illinois Tech Certificate</div>
+                  <div class="text-[10px] text-gb-l-fg-muted dark:text-gb-fg-muted">HMRHWGW-JOOYL.pdf</div>
+                </div>
+              </div>
+              <svg class="w-4 h-4 text-gb-l-fg-muted dark:text-gb-fg-muted group-hover:text-gb-l-green dark:group-hover:text-gb-green transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            </a>
+
+            <!-- Certificate 2 Link -->
+            <a href="Certifications/NSDC_3657680_CAN_39306001.pdf" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3 rounded bg-gb-l-bg-hard dark:bg-gb-bg-hard border border-gb-l-border dark:border-gb-border hover:border-gb-l-green dark:hover:border-gb-green transition group">
+              <div class="flex items-center space-x-2.5">
+                <svg class="w-4 h-4 text-gb-l-aqua dark:text-gb-aqua" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+                <div class="text-left">
+                  <div class="font-semibold text-gb-l-fg-strong dark:text-gb-fg-strong">NSDC Certification</div>
+                  <div class="text-[10px] text-gb-l-fg-muted dark:text-gb-fg-muted">NSDC_3657680.pdf</div>
+                </div>
+              </div>
+              <svg class="w-4 h-4 text-gb-l-fg-muted dark:text-gb-fg-muted group-hover:text-gb-l-aqua dark:group-hover:text-gb-aqua transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            </a>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="py-16">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        
+        <div class="mb-10 flex items-center space-x-2 font-mono text-xs uppercase tracking-wider text-gb-l-green dark:text-gb-green">
+          <span>06.</span>
+          <span>Contact Me</span>
+          <div class="h-px bg-gb-l-border dark:border-gb-border flex-grow max-w-xs ml-2"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+          
+          <!-- Contact Details -->
+          <div class="md:col-span-5 space-y-3 font-mono text-xs">
+            <div class="p-4 rounded border border-gb-l-border dark:border-gb-border bg-gb-l-surface dark:bg-gb-surface space-y-2">
+              <div class="text-gb-l-fg-muted dark:text-gb-fg-muted">Direct Email</div>
+              <div class="font-bold text-gb-l-fg-strong dark:text-gb-fg-strong break-all">contactme.saraths@gmail.com</div>
+              <div class="flex gap-2 pt-1">
+                <a href="mailto:contactme.saraths@gmail.com" class="px-3 py-1.5 rounded bg-gb-l-green dark:bg-gb-green text-gb-bg-hard font-semibold">Send Mail</a>
+                <button type="button" onclick="copyEmail()" class="px-3 py-1.5 rounded border border-gb-l-border dark:border-gb-border hover:border-gb-l-fg dark:hover:border-gb-fg">Copy</button>
+              </div>
+            </div>
+
+            <div class="p-4 rounded border border-gb-l-border dark:border-gb-border bg-gb-l-surface dark:bg-gb-surface space-y-1">
+              <div class="text-gb-l-fg-muted dark:text-gb-fg-muted">Location</div>
+              <div class="font-bold text-gb-l-fg-strong dark:text-gb-fg-strong">Kerala, India (Open to Relocation & Remote)</div>
+            </div>
+
+            <div class="p-4 rounded border border-gb-l-border dark:border-gb-border bg-gb-l-surface dark:bg-gb-surface space-y-1">
+              <div class="text-gb-l-fg-muted dark:text-gb-fg-muted">Social Channels</div>
+              <div class="flex space-x-3 pt-1">
+                <a href="https://github.com/saraths3" target="_blank" rel="noopener noreferrer" class="text-gb-l-green dark:text-gb-green hover:underline">github.com/saraths3</a>
+                <span>•</span>
+                <a href="https://www.linkedin.com/in/sarath1s/" target="_blank" rel="noopener noreferrer" class="text-gb-l-blue dark:text-gb-blue hover:underline">linkedin/sarath1s</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Message Form -->
+          <div class="md:col-span-7 p-6 rounded border border-gb-l-border dark:border-gb-border bg-gb-l-surface dark:bg-gb-surface">
+            <h3 class="font-mono text-sm font-bold text-gb-l-fg-strong dark:text-gb-fg-strong mb-1">
+              Send a Quick Message
+            </h3>
+            <p class="font-mono text-xs text-gb-l-fg-muted dark:text-gb-fg-muted mb-4">
+              Enter your details to generate a formatted email message.
+            </p>
+
+            <form onsubmit="handleContact(event)" class="space-y-4 font-mono text-xs">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="contact-name" class="block text-gb-l-fg-muted dark:text-gb-fg-muted mb-1">Your Name</label>
+                  <input type="text" id="contact-name" required placeholder="John Doe" class="w-full px-3 py-2 rounded bg-gb-l-bg-hard dark:bg-gb-bg-hard border border-gb-l-border dark:border-gb-border text-gb-l-fg-strong dark:text-gb-fg-strong focus:outline-none focus:border-gb-l-green dark:focus:border-gb-green">
+                </div>
+                <div>
+                  <label for="contact-subject" class="block text-gb-l-fg-muted dark:text-gb-fg-muted mb-1">Subject</label>
+                  <input type="text" id="contact-subject" required placeholder="Python Role / Project" class="w-full px-3 py-2 rounded bg-gb-l-bg-hard dark:bg-gb-bg-hard border border-gb-l-border dark:border-gb-border text-gb-l-fg-strong dark:text-gb-fg-strong focus:outline-none focus:border-gb-l-green dark:focus:border-gb-green">
+                </div>
+              </div>
+
+              <div>
+                <label for="contact-message" class="block text-gb-l-fg-muted dark:text-gb-fg-muted mb-1">Message</label>
+                <textarea id="contact-message" rows="4" required placeholder="Hi Sarath, I would love to connect..." class="w-full px-3 py-2 rounded bg-gb-l-bg-hard dark:bg-gb-bg-hard border border-gb-l-border dark:border-gb-border text-gb-l-fg-strong dark:text-gb-fg-strong focus:outline-none focus:border-gb-l-green dark:focus:border-gb-green"></textarea>
+              </div>
+
+              <button type="submit" class="w-full py-2.5 rounded bg-gb-l-green dark:bg-gb-green text-gb-bg-hard font-semibold hover:opacity-90 transition flex items-center justify-center space-x-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+                <span>Open in Email Client</span>
+              </button>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- MINIMAL FOOTER -->
+  <footer class="border-t border-gb-l-border dark:border-gb-border bg-gb-l-bg dark:bg-gb-bg py-8 font-mono text-xs text-gb-l-fg-muted dark:text-gb-fg-muted">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        <span>&copy; <span id="year">2026</span> Sarath S.</span>
+        <span class="mx-1.5">•</span>
+        <span class="text-gb-l-green dark:text-gb-green">Gruvbox Minimal Portfolio</span>
+      </div>
+
+      <div class="flex items-center space-x-4">
+        <a href="https://github.com/saraths3" target="_blank" rel="noopener noreferrer" class="hover:text-gb-l-fg-strong dark:hover:text-gb-fg-strong">GitHub</a>
+        <a href="https://www.linkedin.com/in/sarath1s/" target="_blank" rel="noopener noreferrer" class="hover:text-gb-l-blue dark:hover:text-gb-blue">LinkedIn</a>
+        <a href="#hero" class="hover:text-gb-l-green dark:hover:text-gb-green flex items-center space-x-1">
+          <span>Top</span>
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MOBILE BOTTOM NAVIGATION DOCK (RESPONSIVE) -->
+  <nav id="mobile-bottom-bar" class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-gb-l-bg/95 dark:bg-gb-bg/95 border-t border-gb-l-border dark:border-gb-border px-2 py-1.5 transition-colors">
+    <div class="flex items-center justify-around max-w-md mx-auto text-gb-l-fg-muted dark:text-gb-fg-muted font-mono text-[10px]">
+      <a href="#hero" class="flex flex-col items-center py-1 px-2.5 rounded hover:text-gb-l-green dark:hover:text-gb-green transition">
+        <svg class="w-4 h-4 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        <span>home</span>
+      </a>
+      <a href="#about" class="flex flex-col items-center py-1 px-2.5 rounded hover:text-gb-l-green dark:hover:text-gb-green transition">
+        <svg class="w-4 h-4 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+        <span>about</span>
+      </a>
+      <a href="#skills" class="flex flex-col items-center py-1 px-2.5 rounded hover:text-gb-l-green dark:hover:text-gb-green transition">
+        <svg class="w-4 h-4 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/></svg>
+        <span>skills</span>
+      </a>
+      <a href="#projects" class="flex flex-col items-center py-1 px-2.5 rounded hover:text-gb-l-green dark:hover:text-gb-green transition">
+        <svg class="w-4 h-4 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+        <span>projects</span>
+      </a>
+      <a href="#ongoing" class="flex flex-col items-center py-1 px-2.5 rounded hover:text-gb-l-orange dark:hover:text-gb-orange transition relative">
+        <svg class="w-4 h-4 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        <span>ongoing</span>
+        <span class="absolute top-1 right-2 w-1.5 h-1.5 rounded-full bg-gb-orange animate-ping"></span>
+      </a>
+      <a href="Resume/Resume.pdf" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center py-1 px-2.5 rounded text-gb-l-green dark:text-gb-green transition">
+        <svg class="w-4 h-4 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        <span>resume</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- ULTRA-MINIMAL PURE JAVASCRIPT (~25 LINES) -->
+  <script>
+    // 1. Theme toggle with localStorage persistence
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    }
+    // Set initial theme based on saved preference or default dark
+    if (localStorage.getItem('theme') === 'light') {
+      document.documentElement.classList.remove('dark');
+    }
+
+    // 2. Mobile drawer menu toggle
+    function toggleMobileMenu() {
+      const drawer = document.getElementById('mobile-drawer');
+      const isHidden = drawer.classList.toggle('hidden');
+      document.getElementById('menu-icon-bars').classList.toggle('hidden', !isHidden);
+      document.getElementById('menu-icon-close').classList.toggle('hidden', isHidden);
+    }
+
+    // 3. Email copy with minimal toast
+    function copyEmail() {
+      navigator.clipboard.writeText('contactme.saraths@gmail.com').then(() => {
+        const toast = document.getElementById('toast');
+        document.getElementById('toast-message').textContent = 'Copied contactme.saraths@gmail.com!';
+        toast.classList.remove('translate-y-20', 'opacity-0');
+        toast.classList.add('translate-y-0', 'opacity-100');
+        setTimeout(() => {
+          toast.classList.add('translate-y-20', 'opacity-0');
+          toast.classList.remove('translate-y-0', 'opacity-100');
+        }, 2500);
+      });
+    }
+
+    // 4. Contact form mailto handler
+    function handleContact(e) {
+      e.preventDefault();
+      const n = document.getElementById('contact-name').value;
+      const s = document.getElementById('contact-subject').value;
+      const m = document.getElementById('contact-message').value;
+      window.location.href = `mailto:contactme.saraths@gmail.com?subject=${encodeURIComponent(s)}&body=${encodeURIComponent("From: " + n + "\n\n" + m)}`;
+    }
+
+    // 5. Dynamic footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
